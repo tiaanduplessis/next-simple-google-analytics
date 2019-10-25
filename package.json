@@ -1,0 +1,34 @@
+{
+  "name": "next-simple-google-analytics",
+  "description": "Add Google Analytics to your Next.js site in a jiffy",
+  "version": "1.0.0",
+  "repository": "https://github.com/tiaanduplessis/next-simple-google-analytics.git",
+  "author": "Tiaan du Plessis <tiaanduplessis@hotmail.com>",
+  "license": "MIT",
+  "source": "src/index.js",
+  "main": "dist/next-simple-google-analytics.js",
+  "scripts": {
+    "lint": "standard --fix ./src/**/*.js",
+    "build": "microbundle -o dist/ --sourcemap false --compress false --jsx React.createElement --format cjs",
+    "dev": "microbundle watch -o dist/ --sourcemap false --compress false --jsx React.createElement --format cjs"
+  },
+  "keywords": [
+    "nextjs",
+    "next",
+    "google-analytics",
+    "ga",
+    "next-ga"
+  ],
+    "peerDependencies": {
+      "next": "8",
+      "react": "16"
+    },
+    "devDependencies": {
+      "babel-eslint": "10.0.3",
+      "microbundle": "0.11.0",
+      "standard": "14.3.1"
+    },
+    "standard": {
+      "parser": "babel-eslint"
+    }
+}
