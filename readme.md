@@ -50,9 +50,21 @@ class MainDocument extends Document {
 }
 
 export default MainDocument
-
 ```
 
+```js
+import GoogleAnalytics from 'next-simple-google-analytics'
+
+GoogleAnalytics.pageview('/foo/bar', {
+  foo: true
+})
+
+GoogleAnaltyics.event('didthing', {
+ category, label, value
+})
+```
+
+Route changes are required using `routeChangeComplete`.
 
 ## Install
 
