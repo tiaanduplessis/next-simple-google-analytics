@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { Fragment } from 'react'
 import Router from 'next/router'
 
@@ -36,23 +37,22 @@ class GoogleAnalytics extends React.PureComponent {
   render () {
     const { id } = this.props
 
-    return <Fragment>
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
-      />
-      <script dangerouslySetInnerHTML={
-        {
-          __html: `
+    const html = `
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){window.dataLayer.push(arguments)}
                 gtag("js", new Date());
                 gtag("config", "${id}");
             `
-        }
-      }
+
+    /*eslint-disable */
+    return <>
+      <script
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
       />
-    </Fragment>
+      <script dangerouslySetInnerHTML={{ __html: html }} />
+    </>
+      /* eslint-enable */
   }
 }
 
