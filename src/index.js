@@ -11,7 +11,7 @@ class GoogleAnalytics extends React.PureComponent {
     window.ga('send', 'pageview', url || window.location.pathname, fields)
   }
 
-  static event = (action, { category, label, value }) => {
+  static event = (action, { category, label, value, ...rest }) => {
     if (!window.ga) {
       console.warn('GoogleAnalytics must be initialized')
       return
@@ -20,7 +20,8 @@ class GoogleAnalytics extends React.PureComponent {
     window.gtag('event', action, {
       event_category: category,
       event_label: label,
-      value: value
+      value: value,
+      ...rest
     })
   }
 
