@@ -1,7 +1,7 @@
 {
   "name": "next-simple-google-analytics",
   "description": "Add Google Analytics to your Next.js site in a jiffy",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "repository": "https://github.com/tiaanduplessis/next-simple-google-analytics.git",
   "author": "Tiaan du Plessis <tiaanduplessis@hotmail.com>",
   "license": "MIT",
