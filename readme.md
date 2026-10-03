@@ -12,6 +12,7 @@
 
 - [About](#about)
 - [Usage](#usage)
+  - [Disable tracking in local development](#disable-tracking-in-local-development)
 - [Install](#install)
 - [Contribute](#contribute)
 - [License](#License)
@@ -22,7 +23,7 @@ This module is heavily based on the [official example](https://github.com/zeit/n
 
 ## Usage
 
-Add the default export to the `Head` of `_document.js`:
+Add the default export to the `Head` of `_document.js`. This example enables tracking only in production mode:
 
 ```js
 import Document, { Html, Head, Main, NextScript } from 'next/document'
@@ -38,7 +39,9 @@ class MainDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
-          <GoogleAnalytics id="UA-X00XXX0X-X"/>
+          {process.env.NODE_ENV === 'production' && (
+            <GoogleAnalytics id="UA-X00XXX0X-X"/>
+          )}
         </Head>
         <body>
           <Main />
@@ -55,16 +58,24 @@ export default MainDocument
 ```js
 import GoogleAnalytics from 'next-simple-google-analytics'
 
-GoogleAnalytics.pageview('/foo/bar', {
-  foo: true
-})
+if (process.env.NODE_ENV === 'production') {
+  GoogleAnalytics.pageview('/foo/bar', {
+    foo: true
+  })
 
-GoogleAnaltyics.event('didthing', {
- category, label, value
-})
+  GoogleAnalytics.event('didthing', {
+    category, label, value
+  })
+}
 ```
 
 Route changes are required using `routeChangeComplete`.
+
+### Disable tracking in local development
+
+Use the same `process.env.NODE_ENV === 'production'` check around every `GoogleAnalytics` component and every explicit `GoogleAnalytics.pageview` or `GoogleAnalytics.event` call, as shown above. During a normal `next dev` run (`NODE_ENV=development`), the component's scripts are omitted and the guarded tracking calls are skipped. The library does not check the environment automatically; these guards belong in your application.
+
+`NODE_ENV` checks the mode, not the hostname. A production build served with `next start` still enables tracking, even on `localhost`. To disable tracking for local production previews as well, use an application-controlled tracking flag consistently on the server and client, and leave it off for those builds. These guards do not disable analytics loaded separately elsewhere in your application.
 
 ## Install
 
