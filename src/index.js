@@ -26,12 +26,18 @@ class GoogleAnalytics extends React.PureComponent {
     })
   }
 
-  componentDidMount () {
-    Router.events.on('routeChangeComplete', url => {
-      window.gtag('config', this.props.id, {
-        page_path: url
-      })
+  handleRouteChange = url => {
+    window.gtag('config', this.props.id, {
+      page_path: url
     })
+  }
+
+  componentDidMount () {
+    Router.events.on('routeChangeComplete', this.handleRouteChange)
+  }
+
+  componentWillUnmount () {
+    Router.events.off('routeChangeComplete', this.handleRouteChange)
   }
 
   render () {
