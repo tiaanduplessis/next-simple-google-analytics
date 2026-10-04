@@ -13,7 +13,7 @@ class GoogleAnalytics extends React.PureComponent {
   }
 
   static event = (action, { category, label, value, ...rest }) => {
-    if (!window.ga) {
+    if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
       console.warn('GoogleAnalytics must be initialized')
       return
     }
