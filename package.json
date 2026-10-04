@@ -8,7 +8,7 @@
   "source": "src/index.js",
   "main": "dist/next-simple-google-analytics.js",
   "scripts": {
-    "test": "npm run build && node test/lifecycle.js",
+    "test": "npm run build && node test/lifecycle.js && node test/event.js",
     "lint": "standard --fix ./src/**/*.js",
     "build": "microbundle -o dist/ --sourcemap false --compress false --jsx React.createElement --format cjs",
     "dev": "microbundle watch -o dist/ --sourcemap false --compress false --jsx React.createElement --format cjs"
